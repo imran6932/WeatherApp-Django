@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'weather/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h2 class="text-center text-white my-5">Weather App</h2>
+            <div class="col-sm-4 offset-sm-4 text-center">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <div class="input-group flex-nowrap">
+                        <span class="input-group-text" id="addon-wrapping">City</span>
+                        <input type="text" class="form-control" placeholder="Enter City Name" aria-label="Username" aria-describedby="addon-wrapping" name="city" required>
+                      </div>
+                      <button class="btn btn-danger my-3" type="submit">Submit</button>
+                </form>
+                {% if data %}
+                    <div class="row clr border border-5 rounded-3">
+                        <h4 class="text-center text-white my-3">{{data.name}}, {{data.region}}, {{data.country}}</h4>
+                        <div class="col-sm-6">
+                            <div class="my-2" >
+                                    <img class="img" src="{{data.weather_icons}}" alt="">
+                                    <p class="text-white my-3">{{data.weather_descriptions}}</p>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="text lh-sm text-white my-2">
+                                    <p class="fs-1">{{data.temperature}}&#8451;</p><small>Humidity: {{data.humidity}} %</small><br><small>feels like: {{data.feelslike}}&#8451;</small><br><small>Wind Speed: {{data.wind_speed}} km/h</small>
+                            </div>
+                        </div>
+                    </div>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+</body>
+</html>
